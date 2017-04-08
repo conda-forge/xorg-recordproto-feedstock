@@ -7,7 +7,7 @@ Package license: MIT
 
 Feedstock license: BSD 3-Clause
 
-Summary: Definitions for the X event-recording protocol.
+Summary: C prototypes for the X event-recording extension.
 
 
 
