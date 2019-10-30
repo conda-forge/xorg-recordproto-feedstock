@@ -20,19 +20,23 @@ else
     uprefix="$PREFIX"
 fi
 
-# On Windows we need to regenerate the configure scripts.
+# For most X.org packages, we only regenerate the configure scripts on
+# Windows, but the very old config.guess in this package doesn't recognize PPC
+# and ARM so here we regenerate it on all platforms.
+autoreconf_args=(
+    --force
+    --install
+    -I "$mprefix/share/aclocal"
+)
 if [ -n "$CYGWIN_PREFIX" ] ; then
     am_version=1.15 # keep sync'ed with meta.yaml
     export ACLOCAL=aclocal-$am_version
     export AUTOMAKE=automake-$am_version
-    autoreconf_args=(
-        --force
-        --install
-        -I "$mprefix/share/aclocal"
+    autoreconf_args+=(
         -I "$BUILD_PREFIX_M/Library/mingw-w64/share/aclocal"
     )
-    autoreconf "${autoreconf_args[@]}"
 fi
+autoreconf "${autoreconf_args[@]}"
 
 export PKG_CONFIG_LIBDIR=$uprefix/lib/pkgconfig:$uprefix/share/pkgconfig
 configure_args=(

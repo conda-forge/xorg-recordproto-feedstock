@@ -3,7 +3,12 @@
 {% set name = "xorg-" ~ xorg_name %}
 {% set version = "1.14.2" %}
 {% set sha256 = "a777548d2e92aa259f1528de3c4a36d15e07a4650d0976573a8e2ff5437e7370" %}
-{% set am_version = "1.15" %} # keep synchronized with build.sh
+
+# This particular package has a very old config.guess that doesn't recognize
+# PPC and ARM, so unlike most X.org packages we regenerate configure on all
+# platforms.
+{% set am_version = "1.15" if win else '' %}
+{% set posix = 'm2-' if win else '' %}
 
 package:
   name: {{ name|lower }}
@@ -20,9 +25,9 @@ build:
 
 requirements:
   build:
-    - m2-autoconf  # [win]
-    - m2-automake{{ am_version }}  # [win]
-    - m2-libtool  # [win]
+    - {{posix}}autoconf
+    - {{posix}}automake{{ am_version }}
+    - {{posix}}libtool
     - m2w64-pkg-config  # [win]
     - make
     - pkg-config  # [not win]
