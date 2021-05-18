@@ -32,6 +32,7 @@ requirements:
     - make
     - pkg-config  # [not win]
     - posix  # [win]
+    - gnuconfig  # [unix]
     - {{ compiler('c') }}        # [unix]
     - {{ compiler('m2w64_c') }}  # [win]
   host:
@@ -39,8 +40,6 @@ requirements:
 
 test:
   commands:
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: https://www.x.org/
