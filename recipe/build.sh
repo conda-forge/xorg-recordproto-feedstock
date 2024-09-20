@@ -35,7 +35,7 @@ if [ -n "$CYGWIN_PREFIX" ] ; then
     export ACLOCAL=aclocal-$am_version
     export AUTOMAKE=automake-$am_version
     autoreconf_args+=(
-        -I "$BUILD_PREFIX_M/Library/mingw-w64/share/aclocal"
+        -I "$BUILD_PREFIX_M/Library/usr/share/aclocal"
     )
 fi
 autoreconf "${autoreconf_args[@]}"
@@ -50,7 +50,7 @@ configure_args=(
 ./configure "${configure_args[@]}"
 make -j$CPU_COUNT
 make install
-if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
 make check
 fi
 
