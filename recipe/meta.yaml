@@ -28,11 +28,11 @@ requirements:
     - {{ posix }}autoconf
     - {{ posix }}automake{{ am_version }}
     - {{ posix }}libtool
-    - pkg-config  # [win]
-    - make
-    - pkg-config  # [not win]
-    - m2-base  # [win]
+    - pkg-config
     - gnuconfig  # [unix]
+    - m2-base  # [win]
+    - make  # [unix]
+    - m2-make  # [win]
     - {{ compiler('c') }}        # [unix]
     - {{ stdlib("c") }}          # [unix]
     - {{ compiler('m2w64_c') }}  # [win]

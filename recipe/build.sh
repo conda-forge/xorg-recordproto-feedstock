@@ -35,7 +35,7 @@ if [ -n "$CYGWIN_PREFIX" ] ; then
     export ACLOCAL=aclocal-$am_version
     export AUTOMAKE=automake-$am_version
     autoreconf_args+=(
-        -I "$BUILD_PREFIX_M/Library/mingw-w64/share/aclocal"
+        -I "$BUILD_PREFIX_M/Library/usr/share/aclocal"
     )
 fi
 autoreconf "${autoreconf_args[@]}"
